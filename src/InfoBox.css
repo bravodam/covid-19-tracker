@@ -1,0 +1,39 @@
+.infoBox {
+    flex: 1;
+}
+
+.infoBox:not(:last-child){
+    margin-right: 10px;
+}
+
+.infoBox:not(:last-child){
+    color: #cc1034;
+    font-weight: 600;
+    font-size: 1.75rem;
+    margin-bottom: 0.5rem;
+}
+.infoBox:last-child{
+    color: darkgreen;
+    font-weight: 600;
+    font-size: 1.50rem;
+    margin-bottom: 0.5rem;
+}
+
+.infoBox:nth-child(2){
+     color: darkgreen;
+}
+
+.infoBox__total {
+    color: #6c757d;
+    font-weight: 700 !important;
+    font-size: 0.8rem !important;
+    margin-top: 15px !important;
+}
+
+.infoBox__population {
+    color:seagreen !important;
+}
+
+.population{
+  color: seagreen !important;
+}

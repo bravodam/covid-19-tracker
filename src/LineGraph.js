@@ -51,20 +51,16 @@ const options = {
     }
 }
 
-function LineGraph({casesType = "cases"}) {
 
-    const [data, setData] = useState({});
-// https://disease.sh/v3/covid-19/historical/all?lastdays=30
-    
-    const buildChartData = (data, casesType = "cases") => {
+const buildChartData = (data, casesType) => {
         const chartData = [];
         let lastDataPoint;
         for(let date in data.cases){
             if (lastDataPoint) {
-                const newDataPoint = {
+                let newDataPoint = {
                     x: date,
-                    y: data[casesType][date]-lastDataPoint
-                }
+                    y: data[casesType][date] - lastDataPoint
+                };
                 chartData.push(newDataPoint);
             }
             lastDataPoint = data[casesType][date];
@@ -72,14 +68,23 @@ function LineGraph({casesType = "cases"}) {
         return chartData;
     };
     
+
+function LineGraph({casesType = "cases"}) {
+
+    const [data, setData] = useState({});
+// https://disease.sh/v3/covid-19/historical/all?lastdays=30
+    
+    
     useEffect(() => {
 
         const fetchData = async () => {
-            await fetch("https://disease.sh/v3/covid-19/historical/all?lastdays=30")
-                .then((response) => response.json())
+            await fetch("https://disease.sh/v3/covid-19/historical/all?lastdays=120")
+                .then((response) => {
+                    return response.json();
+                })
                 .then((data) => {
 
-                    const chartData = buildChartData(data);
+                    let chartData = buildChartData(data, casesType);
                     setData(chartData);
             
                 });
@@ -95,12 +100,12 @@ function LineGraph({casesType = "cases"}) {
 
     return (
         <div>
-            <h1>I am a Graph</h1>
             {data?.length > 0 && (
                 <Line
                 options={options}
                 data={{
-                    datasets: [{
+                    datasets: [
+                        {
                         backgroundColor: "rgba(204,16,52, 0.5)",
                         borderColor:"#CC1034",
                         data:data,

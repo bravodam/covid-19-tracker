@@ -6,7 +6,7 @@ import { Circle, Popup } from "react-leaflet";
 
 const casesTypeColors = {
     cases: {
-        hex: "#CC1034",
+        hex: "#cc1034",
         multiplier: 800,
     },
     
@@ -20,11 +20,11 @@ const casesTypeColors = {
         multiplier: 2000,
         
     },
-    population: {
-        hex: "#fb4443",
-        multiplier: 2000,
+    // population: {
+    //     hex: "#fb4446",
+    //     multiplier: 1000,
         
-    },
+    // },
    
 };
 
@@ -38,8 +38,10 @@ export const sortData = (data) => {
     
 };
 
+export const prettyPrintStat = (stat) =>
+    stat ? `+${numeral(stat).format("0.0a")}` : "+0";
 //Draw circles on the map with interactive tooltip
-export const showDataOnMap = (data, casesType = "cases") => 
+export const showDataOnMap = (data, casesType = "cases") => (
     data.map((country) => (
         <Circle
             center={[country.countryInfo.lat, country.countryInfo.long]}
@@ -61,7 +63,7 @@ export const showDataOnMap = (data, casesType = "cases") =>
                     <div  className="info-confirmed">Cases:{numeral(country.cases).format("0,0")}</div>
                     <div className="info-recovered">Recovered:{numeral(country.recovered).format("0,0")}</div>
                     <div className="info-deaths">Death:{numeral(country.deaths).format("0,0")}</div>
-                     <div className="info-population">Population:{numeral(country.population).format("0,0")}</div>
+                     {/* <div className="info-population">Population:{numeral(country.population).format("0,0")}</div> */}
 
 
                 </div>
@@ -71,3 +73,4 @@ export const showDataOnMap = (data, casesType = "cases") =>
         </Circle>
         
     ))
+)
