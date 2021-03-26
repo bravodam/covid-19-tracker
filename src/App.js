@@ -7,6 +7,7 @@ import Table from "./Table";
 import { prettyPrintStat, sortData } from "./util";
 import LineGraph from "./LineGraph";
 import "leaflet/dist/leaflet.css";
+import numeral from "numeral";
 
 function App() {
   const [countries, setCountries] = useState([]);
@@ -103,27 +104,28 @@ function App() {
           <InfoBox
             onClick={(e) => setCasesType("cases")}
             title="Coronavirus Cases"
-            cases={prettyPrintStat(countryInfo.todayCases)}
-            total={prettyPrintStat(countryInfo.cases)}
+            cases={numeral(countryInfo.todayCases).format("+0,0")}
+            total={numeral(countryInfo.cases).format("+0,0")}
           />
           
           <InfoBox
             onClick={(e) => setCasesType("recovered")}
             title="Recovered"
-            cases={prettyPrintStat(countryInfo.todayRecovered)}
-            total={prettyPrintStat(countryInfo.recovered)}
+            cases={numeral(countryInfo.todayRecovered).format("+0,0")}
+            total={numeral(countryInfo.recovered).format("+0,0")}
           />
           
           <InfoBox
             onClick={(e) => setCasesType("deaths")}
             title="Deaths"
-            cases={ prettyPrintStat(countryInfo.todayDeaths)} total={prettyPrintStat(countryInfo.deaths)}
+            cases={numeral(countryInfo.todayDeaths).format("+0,0")}
+            total={numeral(countryInfo.deaths).format("+0.0")}
           />
           
           <InfoBox
             className="population"
             title="Population"
-            cases={countryInfo.population}
+            cases={numeral(countryInfo.population).format("0,0")}
         
             />
 
